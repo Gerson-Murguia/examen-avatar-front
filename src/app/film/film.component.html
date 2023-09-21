@@ -1,0 +1,11 @@
+<p>film works! {{films | json}}</p>
+
+<div class="movie-list">
+  <h2>Listado de Películas</h2>
+  <ul>
+    <li *ngFor="let film of films">
+      {{ film['title'] }}
+    </li>
+  </ul>
+</div>
+
