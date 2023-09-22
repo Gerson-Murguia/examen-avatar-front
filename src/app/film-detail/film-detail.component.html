@@ -18,19 +18,20 @@
     </div>
 
     <div class="container mt-5">
-        <h2>Personajes de la Película</h2>
-        <div *ngIf="isCharactersLoading" class="spinner-border text-primary" role="status">
+    <h2>Personajes de la Película</h2>
+    <div *ngIf="isCharactersLoading" class="spinner-border text-primary" role="status">
         <span class="sr-only">Cargando detalles de la película...</span>
-        </div>
-            <div class="row">
-        <div class="col-md-4">
-            <div *ngFor="let charac of characters" class="card mb-4 text-center">
-                <img src="https://placehold.co/400" alt="Imagen del Personaje" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">{{ charac['name'] }}</h5>
-                </div>
-            </div>
-      </div>
     </div>
 
+    <div class="row">
+          <div class="col-md-4" *ngFor="let charac of characters">
+              <div class="card mb-4 text-center">
+                  <img src="https://placehold.co/400" alt="Imagen del Personaje" class="card-img-top">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ charac['name'] }}</h5>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <button class="btn btn-secondary mb-3" (click)="regresar()">Regresar</button>
     </div>
