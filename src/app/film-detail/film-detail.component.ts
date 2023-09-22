@@ -19,20 +19,7 @@ export class FilmDetailComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    const charactersData = localStorage.getItem('charactersDatos');
-    const detailsData = localStorage.getItem('detailsDatos');
-    if (charactersData && detailsData) {
-      this.characters = JSON.parse(charactersData);
-      this.film=JSON.parse(detailsData)
-      this.isCharactersLoading=false;
-      this.isLoading=false;
-    } else {
       this.cargarDetalles();
-    }
-
-
-
-   
   }
 
   regresar() {
@@ -42,17 +29,29 @@ export class FilmDetailComponent implements OnInit {
   cargarDetalles(){
      this.route.params.subscribe( (params: any) => {
       this.filmId =+params['id'];
-      //cargar detalles de la pelicula con el service
-      this.filmService.getFilmById(this.filmId).subscribe((data:[])=>{this.film = data
-        localStorage.setItem('detailsDatos', JSON.stringify(data));
-        this.isLoading=false;
-      });
-      //cargar nombres de personajes
-      this.filmService.getCharactersByFilmId(this.filmId).subscribe((data:[])=>{
-        this.characters = data;
-        localStorage.setItem('charactersDatos', JSON.stringify(data));
+      const charactersData = localStorage.getItem('charactersDatos'+this.filmId);
+      const detailsData = localStorage.getItem('detailsDatos'+this.filmId);
+
+      if (charactersData && detailsData) {
+        this.characters = JSON.parse(charactersData);
+        this.film=JSON.parse(detailsData)
         this.isCharactersLoading=false;
-      });
+        this.isLoading=false;
+      } else{
+          //cargar detalles de la pelicula con el service
+        this.filmService.getFilmById(this.filmId).subscribe((data:[])=>{this.film = data
+          localStorage.setItem('detailsDatos'+this.filmId, JSON.stringify(data));
+          this.isLoading=false;
+        });
+        //cargar nombres de personajes
+        this.filmService.getCharactersByFilmId(this.filmId).subscribe((data:[])=>{
+          this.characters = data;
+          localStorage.setItem('charactersDatos'+this.filmId, JSON.stringify(data));
+          this.isCharactersLoading=false;
+        });
+      }
+
+      
     });
   }
 }
