@@ -22,14 +22,15 @@
         <div *ngIf="isCharactersLoading" class="spinner-border text-primary" role="status">
         <span class="sr-only">Cargando detalles de la película...</span>
         </div>
-    </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div *ngFor="let charac of characters" class="card mb-4">
-                    <img src="https://placehold.co/400" alt="Imagen del Personaje" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ charac['name'] }}</h5>
-                    </div>
+            <div class="row">
+        <div class="col-md-4">
+            <div *ngFor="let charac of characters" class="card mb-4 text-center">
+                <img src="https://placehold.co/400" alt="Imagen del Personaje" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ charac['name'] }}</h5>
                 </div>
             </div>
+      </div>
+    </div>
+
     </div>
