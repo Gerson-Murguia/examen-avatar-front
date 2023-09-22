@@ -28,8 +28,9 @@ export class FilmDetailComponent implements OnInit {
       //cargar nombres de personajes
       this.filmService.getCharactersByFilmId(this.filmId).subscribe((data:[])=>{
         this.characters = data;
-      });
         this.isCharactersLoading=false;
+      });
+  
     });
   }
 
