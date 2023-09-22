@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmService } from '../service/film.service';
-import { FilmResponse } from '../model/FilmResponse';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-film',
@@ -10,12 +10,18 @@ import { FilmResponse } from '../model/FilmResponse';
 export class FilmComponent implements OnInit {
 
   films: [];
+  isLoading: boolean = true;
 
-  constructor(private filmService:FilmService){}
+  constructor(private filmService:FilmService, private router:Router){}
 
   ngOnInit(): void{
     this.filmService.getFilms().subscribe((data:[])=>{this.films = data
+    this.isLoading = false;
     });
+  }
+
+  onFilmClick(filmId: number){
+    this.router.navigate(['/film/',filmId]);
   }
 
 }

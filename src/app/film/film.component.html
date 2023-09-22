@@ -1,11 +1,16 @@
-<p>film works! {{films | json}}</p>
 
-<div class="movie-list">
-  <h2>Listado de Películas</h2>
-  <ul>
-    <li *ngFor="let film of films">
-      {{ film['title'] }}
-    </li>
-  </ul>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2>Listado de Películas</h2>
+      <div *ngIf="isLoading">
+        <i class="fas fa-spinner fa-spin"></i> Cargando películas...
+      </div>
+      <ul class="list-group">
+        <li *ngFor="let film of films" class="list-group-item d-flex justify-content-between align-items-center">
+        {{ film['title'] }}
+        <span class="badge bg-primary rounded-pill" (click)="onFilmClick(film['episode_id'])">Detalles</span></li>
+      </ul>
+    </div>
+  </div>
 </div>
-
